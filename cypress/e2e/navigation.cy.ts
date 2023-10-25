@@ -31,9 +31,18 @@ describe("Sidebar Navigation", () => {
         .should("have.attr", "href", "/dashboard/settings");
     });
 
-    it("is collapsible", () => {
+    it.only("is collapsible", () => {
+      cy.get("nav")
+        .contains("Collapse")
+        .find("img")
+        .should("have.css", "transition");
+
       // collapse navigation
-      cy.get("nav").contains("Collapse").click();
+      cy.get("nav")
+        .contains("Collapse")
+        .click()
+        .find("img")
+        .should("have.css", "rotate", "180deg");
 
       // check that links still exist and are functionable
       cy.get("nav").find("a").should("have.length", 5).eq(1).click();
