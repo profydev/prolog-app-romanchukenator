@@ -135,7 +135,17 @@
 .collapseMenuItem {
   display: none;
 
+  img {
+    transition: rotate 0.2s ease-in-out;
+  }
+
   @media (min-width: breakpoint.$desktop) {
     display: flex;
+  }
+}
+
+.rotateIconOnCollapse {
+  img {
+    rotate: 180deg;
   }
 }
