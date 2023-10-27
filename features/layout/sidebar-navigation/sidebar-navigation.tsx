@@ -8,6 +8,13 @@ import { MenuItemLink } from "./menu-item-link";
 import { Button } from "@features/ui";
 import styles from "./sidebar-navigation.module.scss";
 
+function openEmailClient() {
+  const supportSubject = "Support Request: ";
+  const supportEmail = "support@prolog-app.com";
+
+  window.open(`mailto:${supportEmail}?subject=${supportSubject}`);
+}
+
 const menuItems = [
   { text: "Projects", iconSrc: "/icons/projects.svg", href: Routes.projects },
   { text: "Issues", iconSrc: "/icons/issues.svg", href: Routes.issues },
@@ -83,8 +90,9 @@ export function SidebarNavigation() {
               text="Support"
               iconSrc="/icons/support.svg"
               isCollapsed={isSidebarCollapsed}
-              onClick={() => alert("Support")}
+              onClick={openEmailClient}
             />
+
             <MenuItemButton
               text="Collapse"
               iconSrc="/icons/arrow-left.svg"
