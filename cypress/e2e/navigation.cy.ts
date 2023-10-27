@@ -31,7 +31,7 @@ describe("Sidebar Navigation", () => {
         .should("have.attr", "href", "/dashboard/settings");
     });
 
-    it.only("is collapsible", () => {
+    it("is collapsible", () => {
       cy.get("nav")
         .contains("Collapse")
         .find("img")
@@ -50,6 +50,23 @@ describe("Sidebar Navigation", () => {
 
       // check that text is not rendered
       cy.get("nav").contains("Issues").should("not.exist");
+    });
+
+    it.only("opens a user's default email client when the Support button is clicked", () => {
+      const windowOpenStub = cy.stub().as("windowOpenStub");
+
+      cy.window().then((win) => {
+        cy.stub(win, "open").callsFake(windowOpenStub);
+      });
+
+      cy.get("nav")
+        .contains("Support")
+        .click()
+        .then(() => {
+          expect(windowOpenStub).to.be.calledWith(
+            "mailto:support@prolog-app.com?subject=Support Request: ",
+          );
+        });
     });
   });
 
