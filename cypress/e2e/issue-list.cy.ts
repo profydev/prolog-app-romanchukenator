@@ -23,7 +23,6 @@ describe("Issue List", () => {
 
     // wait for request to resolve
     cy.wait(["@getProjects", "@getIssuesPage1"]);
-    cy.wait(500);
 
     // set button aliases
     cy.get("button").contains("Previous").as("prev-button");
@@ -36,16 +35,35 @@ describe("Issue List", () => {
     });
 
     it("renders the issues", () => {
+      // lets make sure we're on page 1
+      cy.contains("Page 1 of 3");
+
+      const issues = mockIssues1.items;
+
       cy.get("main")
         .find("tbody")
         .find("tr")
         .each(($el, index) => {
-          const issue = mockIssues1.items[index];
+          const issue = issues[index];
           const firstLineOfStackTrace = issue.stack.split("\n")[1].trim();
-          cy.wrap($el).contains(issue.name);
-          cy.wrap($el).contains(issue.message);
-          cy.wrap($el).contains(issue.numEvents);
-          cy.wrap($el).contains(firstLineOfStackTrace);
+
+          cy.wrap($el).get('[data-cy="issues-name"]').contains(issue.name);
+
+          cy.wrap($el)
+            .get('[data-cy="issues-message"]')
+            .contains(issue.message);
+
+          cy.wrap($el)
+            .get('[data-cy="issues-numEvents"]')
+            .contains(issue.numEvents);
+
+          cy.wrap($el)
+            .get('[data-cy="issues-numUsers"]')
+            .contains(issue.numUsers);
+
+          cy.wrap($el)
+            .get('[data-cy="issues-stackTrace"]')
+            .contains(firstLineOfStackTrace);
         });
     });
 
@@ -79,7 +97,6 @@ describe("Issue List", () => {
 
       cy.reload();
       cy.wait(["@getProjects", "@getIssuesPage2"]);
-      cy.wait(1500);
       cy.contains("Page 2 of 3");
     });
   });

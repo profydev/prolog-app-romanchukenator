@@ -17,7 +17,7 @@ const levelColors = {
 };
 
 export function IssueRow({ projectLanguage, issue }: IssueRowProps) {
-  const { name, message, stack, level, numEvents } = issue;
+  const { name, message, stack, level, numEvents, numUsers } = issue;
   const firstLineOfStackTrace = stack.split("\n")[1];
 
   return (
@@ -30,20 +30,26 @@ export function IssueRow({ projectLanguage, issue }: IssueRowProps) {
           alt={projectLanguage}
         />
         <div>
-          <div className={styles.errorTypeAndMessage}>
-            <span className={styles.errorType}>{name}:&nbsp;</span>
+          <div className={styles.errorTypeAndMessage} data-cy="issues-message">
+            <span className={styles.errorType} data-cy="issues-name">
+              {name}:&nbsp;
+            </span>
             {message}
           </div>
-          <div>{firstLineOfStackTrace}</div>
+          <div data-cy="issues-stackTrace">{firstLineOfStackTrace}</div>
         </div>
       </td>
-      <td className={styles.cell}>
+      <td className={styles.cell} data-cy="issues-level">
         <Badge color={levelColors[level]} size={BadgeSize.sm}>
           {capitalize(level)}
         </Badge>
       </td>
-      <td className={styles.cell}>{numEvents}</td>
-      <td className={styles.cell}>{numEvents}</td>
+      <td className={styles.cell} data-cy="issues-numEvents">
+        {numEvents}
+      </td>
+      <td className={styles.cell} data-cy="issues-numUsers">
+        {numUsers}
+      </td>
     </tr>
   );
 }
