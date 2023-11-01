@@ -18,8 +18,10 @@ const languageNames = {
 
 const statusColors = {
   [ProjectStatus.stable]: BadgeColor.success,
+  [ProjectStatus.info]: BadgeColor.success,
   [ProjectStatus.warning]: BadgeColor.warning,
   [ProjectStatus.critical]: BadgeColor.error,
+  [ProjectStatus.error]: BadgeColor.error,
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {

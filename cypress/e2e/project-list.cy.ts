@@ -1,5 +1,6 @@
-import capitalize from "lodash/capitalize";
+// import capitalize from "lodash/capitalize";
 import mockProjects from "../fixtures/projects.json";
+// import color from "../../styles/colors.scss";
 
 describe("Project List", () => {
   beforeEach(() => {
@@ -32,11 +33,50 @@ describe("Project List", () => {
           cy.wrap($el).contains(languageNames[index]);
           cy.wrap($el).contains(mockProjects[index].numIssues);
           cy.wrap($el).contains(mockProjects[index].numEvents24h);
-          cy.wrap($el).contains(capitalize(mockProjects[index].status));
           cy.wrap($el)
             .find("a")
             .should("have.attr", "href", "/dashboard/issues");
         });
+    });
+
+    it("renders proper badge labels and appropriate badge colors", () => {
+      // check that our fixture data has the wrong labels
+      // so we're testing the transformProjectsResponse
+      // function in projecys.ts
+      expect(mockProjects[0].status).to.equal("error");
+      expect(mockProjects[1].status).to.equal("warning");
+      expect(mockProjects[2].status).to.equal("info");
+
+      /*
+        Unfortunately I couldn't get .next() to work
+        as expected, ie:
+
+        cy.get("[data-cy='project-card_badge']")
+          .first()
+          .should("have.text", "Critical")
+          .next()
+          .should("have.text", "Warning");
+
+        The docs are at: https://docs.cypress.io/api/commands/next
+      */
+
+      cy.get("[data-cy='project-card_badge']")
+        .eq(0)
+        .should("have.text", "Critical")
+        .should("have.css", "color", "rgb(180, 35, 24)")
+        .should("have.css", "background-color", "rgb(254, 243, 242)");
+
+      cy.get("[data-cy='project-card_badge']")
+        .eq(1)
+        .should("have.text", "Warning")
+        .should("have.css", "color", "rgb(181, 71, 8)")
+        .should("have.css", "background-color", "rgb(255, 250, 235)");
+
+      cy.get("[data-cy='project-card_badge']")
+        .eq(2)
+        .should("have.text", "Stable")
+        .should("have.css", "color", "rgb(2, 122, 72)")
+        .should("have.css", "background-color", "rgb(236, 253, 243)");
     });
   });
 });
