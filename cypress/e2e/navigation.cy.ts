@@ -38,11 +38,8 @@ describe("Sidebar Navigation", () => {
         .should("have.css", "transition");
 
       // collapse navigation
-      cy.get("nav")
-        .contains("Collapse")
-        .click()
-        .find("img")
-        .should("have.css", "rotate", "180deg");
+      cy.get("nav").contains("Collapse").find("img").click();
+      cy.get("img[alt='Collapse icon']").should("have.css", "rotate", "180deg");
 
       // check that links still exist and are functionable
       cy.get("nav").find("a").should("have.length", 5).eq(1).click();
@@ -52,7 +49,7 @@ describe("Sidebar Navigation", () => {
       cy.get("nav").contains("Issues").should("not.exist");
     });
 
-    it.only("opens a user's default email client when the Support button is clicked", () => {
+    it("opens a user's default email client when the Support button is clicked", () => {
       const windowOpenStub = cy.stub().as("windowOpenStub");
 
       cy.window().then((win) => {
@@ -67,6 +64,31 @@ describe("Sidebar Navigation", () => {
             "mailto:support@prolog-app.com?subject=Support Request: ",
           );
         });
+    });
+
+    it('shows the "large" logo when not collapsed', () => {
+      cy.get("img[alt='logo']").as("logo");
+
+      cy.location().then((loc) => {
+        cy.get("@logo").should(
+          "contain.css",
+          "content",
+          `url("${loc.origin}/icons/logo-large.svg")`,
+        );
+      });
+    });
+
+    it('shows the "small" logo when collapsed', () => {
+      cy.get("nav").contains("Collapse").find("img").click();
+      cy.get("img[alt='logo']").as("logo");
+
+      cy.location().then((loc) => {
+        cy.get("@logo").should(
+          "contain.css",
+          "content",
+          `url("${loc.origin}/icons/logo-small.svg")`,
+        );
+      });
     });
   });
 
@@ -93,6 +115,10 @@ describe("Sidebar Navigation", () => {
       });
     }
 
+    it("does not show the side navigation", () => {
+      cy.get("nav").should("not.be.visible");
+    });
+
     it("toggles sidebar navigation by clicking the menu icon", () => {
       // wait for animation to finish
       cy.wait(500);
@@ -116,6 +142,18 @@ describe("Sidebar Navigation", () => {
       cy.get("img[alt='close menu']").click();
       cy.wait(500);
       isNotInViewport("nav");
+    });
+
+    it('always shows the "large" logo', () => {
+      cy.get("img[alt='logo']").as("logo");
+
+      cy.location().then((loc) => {
+        cy.get("@logo").should(
+          "contain.css",
+          "content",
+          `url("${loc.origin}/icons/logo-large.svg")`,
+        );
+      });
     });
   });
 });
