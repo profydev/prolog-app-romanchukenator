@@ -1,0 +1,65 @@
+@use "@styles/color";
+@use "@styles/font";
+@use "@styles/space";
+@use "@styles/breakpoint";
+@use "@styles/misc";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0 space.$s8;
+  background: color.$gray-50;
+
+  @media (max-width: breakpoint.$desktop) {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: space.$s6;
+    gap: space.$s8;
+  }
+
+  .version,
+  .links,
+  .logo {
+    flex: 0 1 auto;
+    align-self: auto;
+  }
+
+  .version {
+    color: color.$gray-400;
+
+    @media (max-width: breakpoint.$desktop) {
+      order: 3;
+    }
+  }
+
+  .links {
+    color: color.$gray-500;
+
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0;
+      gap: space.$s6;
+      list-style-type: none;
+
+      @media (max-width: breakpoint.$desktop) {
+        margin: 0;
+      }
+    }
+
+    li a {
+      text-decoration: none;
+      color: color.$gray-500;
+
+      &:visited {
+        color: color.$gray-500;
+      }
+    }
+  }
+}
