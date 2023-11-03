@@ -1,6 +1,4 @@
-// import capitalize from "lodash/capitalize";
 import mockProjects from "../fixtures/projects.json";
-// import color from "../../styles/colors.scss";
 
 describe("Project List", () => {
   beforeEach(() => {
