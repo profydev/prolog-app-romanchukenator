@@ -1,0 +1,29 @@
+@use "@styles/color";
+@use "@styles/space";
+
+.alertBanner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: space.$s4;
+  border-radius: space.$s2;
+
+  .message,
+  .alertButton {
+    display: flex;
+    align-items: center;
+    gap: space.$s3;
+    color: color.$error-700;
+  }
+
+  .alertButton {
+    gap: space.$s2;
+    white-space: nowrap;
+  }
+}
+
+.error {
+  border: 1px solid color.$error-300;
+  background: color.$error-25;
+  color: color.$error-700;
+}

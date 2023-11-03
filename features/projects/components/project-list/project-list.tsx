@@ -1,10 +1,10 @@
 import { ProjectCard } from "../project-card";
-import { LoadingSpinner } from "@features/ui";
+import { LoadingSpinner, AlertBanner } from "@features/ui";
 import { useGetProjects } from "../../api/use-get-projects";
 import styles from "./project-list.module.scss";
 
 export function ProjectList() {
-  const { data, isLoading, isError, error } = useGetProjects();
+  const { data, isLoading, isError, error, refetch } = useGetProjects();
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -12,16 +12,25 @@ export function ProjectList() {
 
   if (isError) {
     console.error(error);
-    return <div>Error: {error.message}</div>;
+    return (
+      <AlertBanner
+        message={error.message}
+        action={() => {
+          refetch();
+        }}
+      />
+    );
   }
 
   return (
-    <ul data-cy="project-list_projectCards" className={styles.list}>
-      {data?.map((project) => (
-        <li data-cy="project-list_projectCard" key={project.id}>
-          <ProjectCard project={project} />
-        </li>
-      ))}
+    <ul className={styles.list} data-cy="project-list">
+      {typeof data == "string"
+        ? ""
+        : data?.map((project) => (
+            <li key={project.id} data-cy="project-list_projectCard">
+              <ProjectCard project={project} />
+            </li>
+          ))}
     </ul>
   );
 }
