@@ -1,5 +1,4 @@
 import Link from "next/link";
-import capitalize from "lodash/capitalize";
 import { Badge, BadgeColor } from "@features/ui";
 import { Routes } from "@config/routes";
 import { ProjectLanguage, ProjectStatus } from "@api/projects.types";
@@ -17,10 +16,21 @@ const languageNames = {
 };
 
 const statusColors = {
-  [ProjectStatus.stable]: BadgeColor.success,
+  [ProjectStatus.info]: BadgeColor.success,
   [ProjectStatus.warning]: BadgeColor.warning,
-  [ProjectStatus.critical]: BadgeColor.error,
+  [ProjectStatus.error]: BadgeColor.error,
 };
+
+function getStatusDisplayText(status: ProjectStatus) {
+  switch (status) {
+    case ProjectStatus.error:
+      return "Critical";
+    case ProjectStatus.warning:
+      return "Warning";
+    case ProjectStatus.info:
+      return "Stable";
+  }
+}
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const { name, language, numIssues, numEvents24h, status } = project;
@@ -50,7 +60,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <div className={styles.issuesNumber}>{numEvents24h}</div>
           </div>
           <div className={styles.status}>
-            <Badge color={statusColors[status]}>{capitalize(status)}</Badge>
+            <Badge color={statusColors[status]}>
+              {getStatusDisplayText(status)}
+            </Badge>
           </div>
         </div>
       </div>

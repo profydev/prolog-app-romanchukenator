@@ -5,5 +5,6 @@ const ENDPOINT = "/project";
 
 export async function getProjects() {
   const { data } = await axios.get<Project[]>(ENDPOINT);
+
   return data;
 }

@@ -30,24 +30,24 @@ export function IssueRow({ projectLanguage, issue }: IssueRowProps) {
           alt={projectLanguage}
         />
         <div>
-          <div className={styles.errorTypeAndMessage} data-cy="issues-message">
-            <span className={styles.errorType} data-cy="issues-name">
+          <div className={styles.errorTypeAndMessage} data-cy="issues_message">
+            <span className={styles.errorType} data-cy="issues_name">
               {name}:&nbsp;
             </span>
             {message}
           </div>
-          <div data-cy="issues-stackTrace">{firstLineOfStackTrace}</div>
+          <div data-cy="issues_stackTrace">{firstLineOfStackTrace}</div>
         </div>
       </td>
-      <td className={styles.cell} data-cy="issues-level">
+      <td className={styles.cell} data-cy="issues_level">
         <Badge color={levelColors[level]} size={BadgeSize.sm}>
           {capitalize(level)}
         </Badge>
       </td>
-      <td className={styles.cell} data-cy="issues-numEvents">
+      <td className={styles.cell} data-cy="issues_numEvents">
         {numEvents}
       </td>
-      <td className={styles.cell} data-cy="issues-numUsers">
+      <td className={styles.cell} data-cy="issues_numUsers">
         {numUsers}
       </td>
     </tr>

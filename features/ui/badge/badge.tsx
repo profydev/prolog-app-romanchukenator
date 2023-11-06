@@ -28,7 +28,10 @@ export function Badge({
   color = BadgeColor.primary,
 }: BadgeProps) {
   return (
-    <div className={classNames(styles.container, styles[size], styles[color])}>
+    <div
+      data-cy="project-card_badge"
+      className={classNames(styles.container, styles[size], styles[color])}
+    >
       {children}
     </div>
   );

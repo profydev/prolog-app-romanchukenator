@@ -47,22 +47,22 @@ describe("Issue List", () => {
           const issue = issues[index];
           const firstLineOfStackTrace = issue.stack.split("\n")[1].trim();
 
-          cy.wrap($el).get('[data-cy="issues-name"]').contains(issue.name);
+          cy.wrap($el).get('[data-cy="issues_name"]').contains(issue.name);
 
           cy.wrap($el)
-            .get('[data-cy="issues-message"]')
+            .get('[data-cy="issues_message"]')
             .contains(issue.message);
 
           cy.wrap($el)
-            .get('[data-cy="issues-numEvents"]')
+            .get('[data-cy="issues_numEvents"]')
             .contains(issue.numEvents);
 
           cy.wrap($el)
-            .get('[data-cy="issues-numUsers"]')
+            .get('[data-cy="issues_numUsers"]')
             .contains(issue.numUsers);
 
           cy.wrap($el)
-            .get('[data-cy="issues-stackTrace"]')
+            .get('[data-cy="issues_stackTrace"]')
             .contains(firstLineOfStackTrace);
         });
     });
