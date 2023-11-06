@@ -34,6 +34,17 @@ describe("Issue List", () => {
       cy.viewport(1025, 900);
     });
 
+    it("renders loading spinner", () => {
+      cy.intercept("GET", "https://prolog-api.profy.dev/", {
+        delayMs: 100,
+      });
+
+      cy.visit(`http://localhost:3000/dashboard/issues`);
+
+      cy.get('[data-cy="loading-spinner"]').should("be.visible");
+      cy.get('[data-cy="loading-spinner"]').should("not.exist");
+    });
+
     it("renders the issues", () => {
       // lets make sure we're on page 1
       cy.contains("Page 1 of 3");
