@@ -16,9 +16,9 @@ export function ProjectList() {
   }
 
   return (
-    <ul className={styles.list}>
+    <ul data-cy="project-list_projectCards" className={styles.list}>
       {data?.map((project) => (
-        <li key={project.id}>
+        <li data-cy="project-list_projectCard" key={project.id}>
           <ProjectCard project={project} />
         </li>
       ))}

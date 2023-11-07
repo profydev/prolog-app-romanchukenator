@@ -15,20 +15,35 @@
 }
 
 .main {
+  display: flex;
+  flex-direction: column;
   flex: 1;
-}
-
-.contentContainer {
-  min-height: calc(100vh - 2 * space.$s8 - misc.$header-height);
+  justify-content: space-between;
   margin-top: misc.$header-height;
-  padding: space.$s8 space.$s3;
   background: white;
 
   @media (min-width: breakpoint.$desktop) {
-    min-height: calc(100vh - space.$s3 - 2 * space.$s8);
     margin-top: space.$s3;
-    padding: space.$s8;
+    padding-top: space.$s8;
     border-top-left-radius: space.$s10;
+  }
+}
+
+.contentWrapper {
+  @media (max-width: breakpoint.$desktop) {
+    padding-top: space.$s8;
+  }
+
+  .contentHeader {
+    padding: 0 space.$s8;
+  }
+
+  .contentContainer {
+    padding: space.$s8 space.$s3;
+
+    @media (min-width: breakpoint.$desktop) {
+      padding: space.$s6;
+    }
   }
 }
 
