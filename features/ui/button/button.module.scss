@@ -1,4 +1,12 @@
+@use "@styles/color";
+@use "@styles/font";
+@use "@styles/space";
+
 .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: space.$s2;
   cursor: pointer;
 
   /* remove default button styles */
@@ -14,5 +22,194 @@
   &::-moz-focus-inner {
     border: 0;
     padding: 0;
+  }
+
+  &.small,
+  &.medium,
+  &.large,
+  &.xlarge {
+    border-radius: 8px;
+  }
+
+  // sizes
+  &.small {
+    padding: space.$s2 space.$s3-875;
+    font: font.$text-sm-regular;
+  }
+
+  &.small-noText {
+    padding: space.$s2;
+  }
+
+  &.medium {
+    padding: space.$s2-625 space.$s4;
+    font: font.$text-sm-regular;
+  }
+
+  &.large {
+    padding: space.$s2-625 space.$s4-125;
+    font: font.$text-md-medium;
+  }
+
+  &.medium-noText,
+  &.large-noText {
+    padding: space.$s2-625;
+  }
+
+  &.xlarge {
+    padding: space.$s3 space.$s5;
+    font: font.$text-md-medium;
+  }
+
+  &.xlarge-noText {
+    padding: space.$s3;
+  }
+
+  // colors
+  &.primary,
+  &.secondary,
+  &.gray,
+  &.error {
+    box-shadow: 0 1px 2px 0 rgb(16 24 40 / 5%);
+  }
+
+  &.primary {
+    color: white;
+    background-color: color.$primary-600;
+    border: 1px solid color.$primary-600;
+
+    // states
+    &:hover {
+      background-color: color.$primary-700;
+      border: 1px solid color.$primary-700;
+    }
+
+    &:focus {
+      outline: 4px solid color.$primary-100;
+      border: 1px solid color.$primary-100;
+    }
+
+    &:disabled {
+      background-color: color.$primary-200;
+      border: 1px solid color.$primary-200;
+    }
+  }
+
+  &.secondary {
+    color: color.$primary-700;
+    background-color: color.$primary-50;
+    border: 1px solid color.$primary-50;
+
+    // states
+    &:hover {
+      background-color: color.$primary-100;
+      border: 1px solid color.$primary-100;
+    }
+
+    &:focus {
+      background-color: color.$primary-50;
+      outline: 4px solid color.$primary-100;
+      border: 1px solid color.$primary-100;
+    }
+
+    &:disabled {
+      color: color.$primary-300;
+      background-color: color.$primary-25;
+      border: 1px solid color.$primary-25;
+    }
+  }
+
+  &.gray {
+    color: color.$gray-700;
+    background-color: white;
+    border: 1px solid color.$gray-300;
+
+    // states
+    &:hover {
+      color: color.$gray-800;
+      background-color: color.$gray-50;
+      border: 1px solid color.$primary-300;
+    }
+
+    &:focus {
+      outline: 4px solid color.$gray-100;
+      border: 1px solid color.$gray-300;
+    }
+
+    &:disabled {
+      color: color.$gray-300;
+      background-color: white;
+      border: 1px solid color.$gray-200;
+    }
+  }
+
+  &.empty {
+    color: color.$primary-700;
+    background-color: white;
+    border: 1px solid white;
+
+    // states
+    &:hover {
+      background-color: color.$primary-50;
+      border: 1px solid color.$primary-50;
+    }
+
+    &:focus {
+      // same as the regular state, eh. C'est la vie.
+      color: color.$primary-700;
+      background-color: white;
+      border: 1px solid white;
+    }
+
+    &:disabled {
+      color: color.$gray-300;
+    }
+  }
+
+  &.emptyGray {
+    color: color.$gray-500;
+    background-color: white;
+    border: 1px solid white;
+
+    // states
+    &:hover {
+      color: color.$gray-600;
+      background-color: color.$gray-50;
+      border: 1px solid color.$gray-50;
+    }
+
+    &:focus {
+      // same as the regular state, eh. C'est la vie.
+      color: color.$gray-500;
+      background-color: white;
+      border: 1px solid white;
+    }
+
+    &:disabled {
+      color: color.$gray-300;
+    }
+  }
+
+  &.error {
+    color: white;
+    background-color: color.$error-600;
+    border: 1px solid color.$error-600;
+
+    // states
+    &:hover {
+      background-color: color.$error-700;
+      border: 1px solid color.$error-700;
+    }
+
+    &:focus {
+      background-color: color.$error-600;
+      outline: 4px solid color.$error-100;
+      border: 1px solid color.$error-100;
+    }
+
+    &:disabled {
+      background-color: color.$error-200;
+      border: 1px solid color.$error-200;
+    }
   }
 }

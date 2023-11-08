@@ -48,6 +48,7 @@ export function SidebarNavigation() {
           <Button
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
             className={styles.menuButton}
+            noStyles={true}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
