@@ -40,7 +40,7 @@ export function AlertBanner({
         data-cy={`alert-banner_button${capitalize(type)}`}
         className={styles.message}
       >
-        <Button onClick={action} className={styles.alertButton}>
+        <Button onClick={action} className={styles.alertButton} noStyles={true}>
           Try again
           <Image
             src="/icons/arrow-right.svg"
