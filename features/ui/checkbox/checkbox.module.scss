@@ -1,0 +1,131 @@
+@use "@styles/color";
+@use "@styles/font";
+@use "@styles/space";
+
+.checkbox {
+  /* remove default button styles */
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  appearance: none;
+  display: grid;
+  grid-template-columns: space.$s4 auto;
+  gap: space.$s2;
+  color: color.$gray-700;
+  cursor: pointer;
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+  &.small {
+    font: font.$text-sm-medium;
+  }
+
+  &.medium {
+    gap: space.$s3;
+    font: font.$text-md-medium;
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+
+      &::before {
+        content: "";
+        width: 20px;
+        height: 20px;
+      }
+
+      &:checked::before,
+      &:indeterminate,
+      &:indeterminate::before,
+      &:disabled:checked::before,
+      &:disabled:indeterminate::before {
+        background-size: 18px 18px;
+      }
+    }
+  }
+
+  &.disabled {
+    cursor: default;
+    color: color.$gray-300;
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    border: 1px solid color.$gray-300;
+    border-radius: 4px;
+    transform: translateY(1px);
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      background-position: center;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+
+      /* Windows High Contrast Mode */
+      // background-color: CanvasText;
+    }
+
+    &:checked::before,
+    &:indeterminate::before {
+      border: 1px solid color.$primary-600;
+      border-radius: 4px;
+      background-color: color.$primary-50;
+      transform: scale(1);
+    }
+
+    &:checked::before {
+      background-image: url("/icons/check.svg");
+    }
+
+    &:indeterminate,
+    &:indeterminate::before {
+      background-image: url("/icons/minus.svg");
+    }
+
+    &:hover {
+      border: 1px solid color.$primary-300;
+      background-color: color.$primary-50;
+    }
+
+    &:focus {
+      border: 1px solid color.$primary-300;
+      outline: 4px solid color.$primary-100;
+    }
+
+    &:disabled,
+    &:disabled::before {
+      cursor: default;
+      border: 1px solid color.$gray-200;
+      background-color: color.$gray-100;
+    }
+
+    &:focus:disabled,
+    &:focus:disabled::before {
+      border: 1px solid color.$gray-200;
+      background-color: color.$gray-100;
+    }
+
+    &:disabled:checked::before {
+      background-image: url("/icons/check-gray.svg");
+    }
+
+    &:disabled:indeterminate::before {
+      background-image: url("/icons/minus-gray.svg");
+    }
+  }
+}
