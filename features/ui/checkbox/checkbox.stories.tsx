@@ -53,8 +53,6 @@ const Template: StoryFn<typeof Checkbox> = ({
 
     <input
       type="submit"
-      name="submit"
-      value="Submit"
       style={{ marginLeft: "auto", marginRight: "auto", display: "flex" }}
     />
   </form>
