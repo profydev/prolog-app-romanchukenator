@@ -36,7 +36,7 @@
       -moz-osx-font-smoothing: inherit;
       appearance: none;
       width: 100%;
-      padding: space.$s2-625 space.$s4;
+      padding: space.$s2-625 space.$s3-875;
       background-color: white;
       border: 1px solid color.$gray-300;
       border-radius: 8px;
@@ -46,7 +46,7 @@
       caret-color: transparent;
 
       &.withIcon {
-        padding-left: calc(space.$s4 + space.$s5);
+        padding-left: calc(space.$s3-875 + space.$s5);
       }
 
       &.error {
@@ -105,10 +105,6 @@
   .help,
   .error {
     font: font.$text-sm-regular;
-
-    &::before {
-      content: "\a0";
-    }
   }
 
   .help {
