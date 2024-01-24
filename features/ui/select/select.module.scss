@@ -1,0 +1,190 @@
+@use "@styles/color";
+@use "@styles/font";
+@use "@styles/space";
+
+.selectWrapper {
+  /* remove default button styles */
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  appearance: none;
+  position: relative;
+
+  .inputWrapper {
+    position: relative;
+    margin: 6px 0;
+
+    img.icon {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: space.$s5;
+      height: space.$s5;
+      transform: translate(50%, -50%);
+    }
+
+    input {
+      box-sizing: border-box;
+      margin: 0;
+      font: font.$text-md-regular;
+      line-height: normal;
+      -webkit-font-smoothing: inherit;
+      -moz-osx-font-smoothing: inherit;
+      appearance: none;
+      width: 100%;
+      padding: space.$s2-625 space.$s4;
+      background-color: white;
+      border: 1px solid color.$gray-300;
+      border-radius: 8px;
+      color: color.$gray-900;
+      text-overflow: ellipsis;
+      cursor: default;
+      caret-color: transparent;
+
+      &.withIcon {
+        padding-left: calc(space.$s4 + space.$s5);
+      }
+
+      &.error {
+        border-color: color.$error-300;
+      }
+
+      &::placeholder {
+        color: color.$gray-500;
+      }
+
+      &:focus {
+        outline: none;
+        border-radius: 8px;
+        border: 1px solid color.$primary-300;
+
+        /* Shadow/xs focused 4px primary-100 */
+        box-shadow:
+          0 0 0 4px color.$primary-100,
+          0 1px 2px 0 rgb(16 24 40 / 5%);
+      }
+
+      &.error:focus {
+        border-color: color.$error-300;
+        box-shadow:
+          0 0 0 4px color.$error-100,
+          0 1px 2px 0 rgb(16 24 40 / 5%);
+      }
+    }
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: space.$s5;
+      height: space.$s5;
+      content: url("/icons/chevron-down.svg");
+      transform: translate(-50%, -50%);
+    }
+
+    &.open {
+      &::before {
+        content: url("/icons/chevron-up.svg");
+      }
+    }
+  }
+
+  .label {
+    font: font.$text-sm-medium;
+    color: color.$gray-700;
+  }
+
+  span:empty::before {
+    content: "\a0";
+  }
+
+  .help,
+  .error {
+    font: font.$text-sm-regular;
+
+    &::before {
+      content: "\a0";
+    }
+  }
+
+  .help {
+    color: color.$gray-500;
+  }
+
+  .error {
+    color: color.$error-500;
+  }
+}
+
+.dropdown {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+  width: 100%;
+  overflow-y: scroll;
+  padding: space.$s1 0;
+  margin-top: space.$s2;
+  list-style-type: none;
+  background-color: white;
+  border-radius: 8px;
+
+  /* Shadow/lg */
+  box-shadow:
+    0 4px 6px 0 rgb(16 24 40 / 5%),
+    0 12px 16px -4px rgb(16 24 40 / 10%);
+
+  li {
+    position: relative;
+    display: flex;
+    padding: space.$s2-625 space.$s4;
+    align-items: center;
+    gap: space.$s2;
+    align-self: stretch;
+    cursor: pointer;
+
+    &.withIcon {
+      padding-left: calc(space.$s4 + space.$s5);
+    }
+
+    &.selected {
+      background-color: color.$primary-25;
+
+      &::after {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: space.$s5;
+        height: space.$s5;
+        content: url("/icons/check.svg");
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &:hover,
+    &.highlighted {
+      background-color: color.$primary-25;
+    }
+
+    img.icon {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: space.$s5;
+      height: space.$s5;
+      transform: translate(50%, -50%);
+    }
+  }
+}
+
+.disabled {
+  input:disabled {
+    color: color.$gray-500;
+    background-color: color.$gray-50;
+  }
+}
